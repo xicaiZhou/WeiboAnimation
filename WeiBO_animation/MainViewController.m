@@ -41,6 +41,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     currentPage = 1;
+    returnBtnIndex = 11;
     
     [self addBtn];
 
@@ -190,7 +191,7 @@
 
     [super viewDidAppear:animated];
     
-    [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    [UIView animateWithDuration:0.1 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         im.transform = CGAffineTransformMakeRotation(M_PI_4);
         //取反
         IsSelected = !IsSelected;
@@ -203,11 +204,11 @@
 -(void)singleTapAction:(UIGestureRecognizer *)ges
 {
     
-    [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    [UIView animateWithDuration:0.1 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         
         im.transform = CGAffineTransformIdentity;
             
-        returnBtnIndex = 0;
+//        returnBtnIndex = 11;
         
         [self returnTime];
         
@@ -251,7 +252,7 @@
 
 - (void)returnBtn{
     
-    returnBtnIndex = 0;
+//    returnBtnIndex = (int)_itemArray.count - 1;
 
     [self returnTime];
     
@@ -261,14 +262,14 @@
     NSLog(@"%s",__func__);
     
     //保护
-    if (returnBtnIndex == _itemArray.count) {
+    if (returnBtnIndex == 0) {
         
         [returnTime invalidate];
         [self dismissModalViewControllerAnimated:YES];
         return;
     }
     ZXC_Btn *btn = [[BtnMenuView subviews] objectAtIndex:returnBtnIndex];
-     returnBtnIndex++;
+     returnBtnIndex--;
     switch (currentPage) {
         case 1:
         {
